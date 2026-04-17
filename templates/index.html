@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bote Inteligente - UTL (Dark Mode)</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --verde-utl: #004a2f;
+            --amarillo-utl: #f2cf00;
+            --fondo-oscuro: #000000; /* Negro puro */
+            --tarjeta-oscura: #1a1a1a; /* Gris muy oscuro para contraste */
+            --texto-blanco: #ffffff;
+            --texto-gris: #aaaaaa;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--fondo-oscuro); 
+            margin: 0; 
+            color: var(--texto-blanco); /* Todo el texto base en blanco */
+        }
+
+        /* HEADER PROFESIONAL CON LOGO */
+        header { 
+            background: var(--verde-utl); 
+            color: var(--texto-blanco); 
+            padding: 25px; 
+            text-align: center; 
+            border-bottom: 6px solid var(--amarillo-utl); 
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .logo-utl {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 70px;
+            width: auto;
+        }
+
+        header h1 { margin: 0; font-size: 2em; letter-spacing: 1px; }
+        header p { margin: 5px 0 0 0; font-size: 1.1em; opacity: 0.9; }
+
+        /* CONTENEDOR PRINCIPAL */
+        .main-container { 
+            display: flex; 
+            padding: 30px; 
+            gap: 30px; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* SECCIÓN DEL VIDEO */
+        .video-box { 
+            background: var(--tarjeta-oscura); 
+            padding: 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            text-align: center;
+            flex: 2;
+            min-width: 600px;
+            border: 1px solid #333; /* Borde sutil */
+        }
+
+        .video-box h2 { color: var(--amarillo-utl); margin-top: 0; } /* Título en amarillo para resaltar */
+        
+        .video-box img { 
+            border-radius: 15px; 
+            border: 4px solid #333;
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            background: #000;
+        }
+
+        /* PANEL DERECHO INTERACTIVO */
+        .info-panel { 
+            flex: 1; 
+            min-width: 380px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 25px; 
+        }
+
+        /* TARJETA DEL ROBOT (COOKIE MONSTER) - FONDO NEGRO */
+        .robot-card { 
+            background: #000000; /* Negro puro para que el mounstro flote */
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        #robot-img { 
+            max-width: 200px; /* Un poco más grande para que luzca */
+            height: auto; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+
+        /* CUADRO DE DATOS CURIOSOS CON TEXTO BLANCO */
+        #fact-text { 
+            font-size: 1.15em; 
+            color: var(--texto-blanco); /* Letras blancas */
+            margin-top: 20px; 
+            line-height: 1.5;
+            background: #111; /* Fondo muy oscuro para el texto */
+            padding: 18px; 
+            border-radius: 12px; 
+            border-left: 6px solid var(--amarillo-utl); /* Borde amarillo para resaltar */
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* TARJETA DE ESTADÍSTICAS */
+        .stats-card { 
+            background: var(--tarjeta-oscura); 
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            border: 1px solid #333;
+        }
+
+        .stats-card h2 { color: var(--amarillo-utl); margin-top: 0; text-align: center; }
+
+        .stat-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: #111; /* Fondo oscuro para el item */
+            padding: 12px 20px; 
+            margin: 8px 0; 
+            border-radius: 10px; 
+            border-bottom: 2px solid #333;
+            transition: transform 0.2s;
+        }
+        
+        .stat-item:hover { transform: translateX(5px); background: #222; }
+
+        .stat-name { font-weight: bold; color: var(--texto-gris); text-transform: uppercase; font-size: 0.9em; }
+        .stat-count { font-size: 1.6em; color: var(--amarillo-utl); font-weight: 800; } /* Números en amarillo brillante */
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="{{ url_for('static', filename='logo_utl.png') }}" class="logo-utl" alt="UTL">
+        
+        <h1>BOTE INTELIGENTE CLASIFICADOR</h1>
+        <p>Ingeniería en Mecatrónica | Proyecto Integrador - UTL</p>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="video-box">
+            <h2>Visión Artificial en Tiempo Real</h2>
+            <img src="{{ url_for('video_feed') }}" alt="Cámara con YOLOv8">
+        </div>
+
+        <div class="info-panel">
+            
+            <div class="robot-card">
+                <img id="robot-img" src="{{ url_for('static', filename='esperando.png') }}" alt="Robot">
+                <div id="fact-text">Esperando detección... ♻️</div>
+            </div>
+
+            <div class="stats-card">
+                <h2>Conteo de Residuos</h2>
+                <div class="stat-item"><span class="stat-name">Vidrio</span><span class="stat-count" id="count-glass">0</span></div>
+                <div class="stat-item"><span class="stat-name">Plástico</span><span class="stat-count" id="count-plastic">0</span></div>
+                <div class="stat-item"><span class="stat-name">Papel</span><span class="stat-count" id="count-paper">0</span></div>
+                <div class="stat-item"><span class="stat-name">Cartón</span><span class="stat-count" id="count-cardboard">0</span></div>
+                <div class="stat-item"><span class="stat-name">Basura General</span><span class="stat-count" id="count-trash">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de JavaScript se mantiene igual
+        const imgEsperando = "{{ url_for('static', filename='esperando.png') }}";
+        const imgPensando = "{{ url_for('static', filename='pensando.png') }}";
+        
+        let lastClass = "";
+
+        function updateUI() {
+            $.getJSON('/get_status', function(data) {
+                // Actualizar Contadores
+                $('#count-glass').text(data.counts.glass);
+                $('#count-plastic').text(data.counts.plastic);
+                $('#count-paper').text(data.counts.paper);
+                $('#count-cardboard').text(data.counts.cardboard);
+                $('#count-trash').text(data.counts.trash);
+
+                // Actualizar Dato Curioso
+                $('#fact-text').html(data.fact);
+
+                // Lógica de cambio de imagen
+                if (data.current_class === "waiting" || data.current_class === "") {
+                    if (lastClass !== "waiting") {
+                        $('#robot-img').attr('src', imgEsperando).css('transform', 'scale(1)');
+                        lastClass = "waiting";
+                    }
+                } else {
+                    if (lastClass !== data.current_class) {
+                        $('#robot-img').attr('src', imgPensando).css('transform', 'scale(1.1)');
+                        setTimeout(() => { $('#robot-img').css('transform', 'scale(1)'); }, 300);
+                        lastClass = data.current_class;
+                    }
+                }
+            }).fail(function() {
+                console.log("Error al conectar con el servidor Flask.");
+            });
+        }
+
+        setInterval(updateUI, 1000);
+        updateUI(); // Primera carga
+    </script>
+</body>
+</html>

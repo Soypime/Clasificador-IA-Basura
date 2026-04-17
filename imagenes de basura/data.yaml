@@ -1,0 +1,13 @@
+# Ruta de la carpeta principal de tu dataset
+path: ./imagenes de basura
+
+# Rutas relativas a las subcarpetas de imágenes
+train: train/images
+val: valid/images
+test: test/images
+
+# Número de clases (Ajústalo según tus carpetas, ej: 3 si es Metal, Papel, Plástico)
+nc: 6
+
+# Nombres de las clases (DEBEN estar en el mismo orden que tus carpetas)
+names: ['glass', 'paper', 'cardboard', 'plastic', 'metal', 'trash']
